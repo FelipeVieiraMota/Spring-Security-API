@@ -8,10 +8,11 @@ env:
 phases:
   install:
     commands:
-      - echo "Installing Amazon Corretto 21..."
-      - yum install -y java-21-amazon-corretto-devel
+      - echo "Updating apt repositories..."
+      - apt-get update -y
+      - echo "Installing Corretto 21..."
+      - apt-get install -y java-21-amazon-corretto-jdk
       - java -version
-      - echo "Java 21 installed and active"
   pre_build:
     commands:
       - echo "Running Maven build..."
