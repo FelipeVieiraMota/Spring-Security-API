@@ -1,18 +1,6 @@
 version: 0.2
 
-env:
-  variables:
-    JAVA_HOME: "/usr/lib/jvm/java-21-amazon-corretto"
-    PATH: "/usr/lib/jvm/java-21-amazon-corretto/bin:$PATH"
-
 phases:
-  install:
-    commands:
-      - echo "Updating apt repositories..."
-      - apt-get update -y
-      - echo "Installing Corretto 21..."
-      - apt-get install -y java-21-amazon-corretto-jdk
-      - java -version
   pre_build:
     commands:
       - echo "Running Maven build..."
