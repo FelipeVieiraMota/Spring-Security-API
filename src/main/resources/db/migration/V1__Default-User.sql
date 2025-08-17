@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS tb_users (
 CREATE UNIQUE INDEX IF NOT EXISTS ux_tb_users_login ON tb_users(login);
 
 INSERT INTO tb_users (id, login, password, role)
-VALUES (RANDOM_UUID(), 'felipe','$2a$10$rotrJk9GdcgAoqGFpCI9C.8V.BBLs/XEFSlwhISirk/yGBAHqb0DK', 'ADMIN');
+VALUES (RANDOM_UUID(), 'felipevieiramota','$2a$12$ahaoCu6NVD8UuNoxWbYFduBnZmndtCgkOgkFNJTp8xmvJaUcIRmfO', 'ADMIN');
