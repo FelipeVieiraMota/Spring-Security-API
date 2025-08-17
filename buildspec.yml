@@ -1,6 +1,13 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo "Installing Amazon Corretto 21..."
+      - yum install -y java-21-amazon-corretto-devel
+      - export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto
+      - export PATH=$JAVA_HOME/bin:$PATH
+      - java -version
   pre_build:
     commands:
       - mvn clean install
