@@ -1,0 +1,39 @@
+services:
+
+  postgres-for-authorization:
+    container_name: authorization-db-container
+    image: postgres:15
+    environment:
+      POSTGRES_DB: master_data
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root -d master_data" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-for-authorization-volume:/var/lib/postgresql/data
+
+  authorization:
+     container_name: authorization-app-container
+     image: authorization-app-image
+     build:
+       context: .
+       dockerfile: Dockerfile
+     environment:
+       SPRING_DATASOURCE_URL: jdbc:postgresql://authorization-db-container:5432/authorization
+       SPRING_DATASOURCE_USERNAME: root
+       SPRING_DATASOURCE_PASSWORD: root
+       SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
+     ports:
+       - "9000:9000"
+     restart: always
+     depends_on:
+       postgres-for-authorization:
+         condition: service_healthy
+
+volumes:
+  postgres-for-authorization-volume:
