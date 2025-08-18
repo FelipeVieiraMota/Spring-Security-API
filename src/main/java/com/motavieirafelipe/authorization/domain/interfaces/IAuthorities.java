@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.motavieirafelipe.authorization.domain.enums.UserRole.ADMIN;
+import static com.motavieirafelipe.authorization.domain.enums.UserRole.USER;
 
 public interface IAuthorities {
 
@@ -16,16 +17,16 @@ public interface IAuthorities {
 
         if(role == ADMIN) {
             return List.of(
-                    new SimpleGrantedAuthority("ROLE_ADMIN")//,
-                    //new SimpleGrantedAuthority("ROLE_COMPANY")
+                new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("ROLE_USER")
             );
         }
 
-//        if(role == COMPANY) {
-//            return List.of(
-//                    new SimpleGrantedAuthority("ROLE_COMPANY")
-//            );
-//        }
+        if(role == USER) {
+            return List.of(
+                new SimpleGrantedAuthority("ROLE_USER")
+            );
+        }
 
         throw new ForbiddenException("Not Allowed.");
     }
